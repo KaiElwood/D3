@@ -1,0 +1,18 @@
+#chart div{
+    height: 20px;
+    background-color: aquamarine;
+    margin: 5px;
+    margin-left: 0;
+}
+
+#chart{
+    margin: auto;
+    width: 60%;
+    display: block;
+}
+
+button {
+    margin: 5px auto;
+    display: block;
+    width: 40%;
+}
