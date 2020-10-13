@@ -5,10 +5,27 @@ $(function () {
         backgroundColor: 'red'
     });
 
+    var backgroundChange = new TweenMax.to('body', 1.5, {
+        backgroundColor: 'black'
+    });
+
+    var backgroundChangeWhite = new TweenMax.to('body', 1.5, {
+        backgroundColor: 'white'
+    });
+
     var containerScene = new ScrollMagic.Scene({
         triggerElement: '#container'
     })
         .setTween(blockTween)
+        .setTween(backgroundChange)
+        .addIndicators()
+        .addTo(controller);
+    
+    var containerScene = new ScrollMagic.Scene({
+        triggerElement: '#container2'
+    })
+        .setTween(blockTween)
+        .setTween(backgroundChangeWhite)
         .addIndicators()
         .addTo(controller);
 });
