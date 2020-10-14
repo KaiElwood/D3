@@ -18,8 +18,8 @@ $(function () {
     , triggerHook: 0.17})
         // .setTween(backgroundChange)
         .setPin('#container')
-        .addIndicators({name: "1 (duration: 700)"})
-        .addIndicators()
+        // .addIndicators({name: "1 (duration: 700)"})
+        // .addIndicators()
         .addTo(controller);
     
     var containerScene2 = new ScrollMagic.Scene({
@@ -28,7 +28,7 @@ $(function () {
     })
         .setPin('#container2')
         .setTween(backgroundChangeBody)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller);
 
     var containerScene3 = new ScrollMagic.Scene({
@@ -37,14 +37,14 @@ $(function () {
     })
         .setPin('#container3')
         // .setTween(backgroundChangeBody)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller);
     
     var backToBlack = new ScrollMagic.Scene({
         triggerElement:'#changeBack', duration: 300
     })
         .setTween(backgroundChangeBlack)
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller);
 
     var containerScene4 = new ScrollMagic.Scene({
@@ -52,12 +52,12 @@ $(function () {
     , triggerHook: 0.1
     })
         .setPin('#container4')
-        .addIndicators()
+        // .addIndicators()
         .addTo(controller);
 
     var Titlescene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 100})
         .setPin("#title")
-        .addIndicators({name: "1 (duration: 100)"}) // add indicators (requires plugin)
+        
         .addTo(controller);
 });
 
