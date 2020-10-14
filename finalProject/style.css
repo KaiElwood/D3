@@ -2,21 +2,184 @@ html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        font-family: 'Roboto', sans-serif;
     }
+
+body{
+    background-color: black;
+}
 #container {
-    margin: 105vh 0;
-    padding: 50px;
-    outline: 1px dashed orange;
+    margin: 20vh 0;
 }
 
 #container > div {
-    padding: 10px;
-    border: 1px solid black;
-    font-family: Helvetica;
+    text-align: center;
+    color: white;
 }
 
 #container2 {
-    margin: 105vh 0;
+    margin: 20vh 0;
+    /* margin-bottom: ; */
     padding: 50px;
-    outline: 1px dashed orange;
+    /* outline: 1px dashed orange; */
+    /* background-color: white; */
+}
+
+#container4 {
+    margin: 20vh 0;
+    /* margin-bottom: ; */
+    padding: 50px;
+    color: white;
+}
+
+#container3 {
+    margin: 20vh 0;
+    /* margin-bottom: ; */
+    padding: 50px;
+}
+
+#container5 {
+    margin: 20vh 0;
+    /* margin-bottom: ; */
+    padding: 50px;
+    color: white;
+}
+
+#title{
+    /* margin-top: 15%; */
+    /* transform: translateY(-50%); */
+    text-align: center;
+    padding: 50px;
+    color: white;
+}
+
+#title h1{
+    font-size: 3rem;
+}
+
+#title h4{
+    margin: auto;
+    max-width: 800px;
+}
+
+.imgCont img{
+    width: 100%;
+}
+
+.imgCont{
+    width: 80%;
+    margin: auto;
+    max-width: 800px;
+}
+
+div.tooltip-donut {
+    position: absolute;
+    text-align: center;
+    padding: .5rem;
+    background: #FFFFFF;
+    color: #313639;
+    border: 1px solid #313639;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+#Q1vis > svg {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        fill: white
+}
+
+.visCont{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 60%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+#Q2vis > svg {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+}
+
+#Q3vis > svg {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+#Q4vis > svg {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    fill: white
+}
+
+#Q1vis > svg > g> g > .tick > text {
+    fill: white;
+    /* stroke: white; */
+}
+#Q1vis > svg > g> g > .tick > line {
+    stroke: white;
+    /* stroke: white; */
+}
+
+#Q4vis > svg > g> g > .tick > text {
+    fill: white;
+    /* stroke: white; */
+}
+#Q4vis > svg > g> g > .tick > line {
+    stroke: white;
+    /* stroke: white; */
+}
+
+.question {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.question > h3{
+    padding: 20px;
+    margin: auto;
+    max-width: 500px;
+}
+
+.question > h2{
+    padding: 20px;
+    margin: auto;
+    font-size: 8rem;
+    max-width: 800px;
+    color: #FBB9B9;
+}
+
+.question > h4{
+    padding: 20px;
+    margin: auto;
+    font-size: 3rem;
+    max-width: 800px;
+    color: #99DFF0;
+}
+
+.question > p{
+    padding: 20px;
+    margin: auto;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+.question > p > span{
+    color: #AFE1CD;
+    font-size: 2rem;
 }

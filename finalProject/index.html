@@ -18,99 +18,83 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/plugins/animation.gsap.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <section class="title">
+            <!-- <div class="spacer s2"></div>
+            <div id="trigger1" class="spacer s0"></div> -->
+            <div id="title">
+                <h1>How do Teens Access and Interact with Health Information?</h1>
+                <h4>Data provided by Northwestern University's Center on Media and Human Development, published in the study "Teens, Health, and Technology" authored by Ellen Wartella. Visualization by Kai Elwood-Dieu</h4>
+            </div>
+            <!-- <div id="pin1" class="box2 blue">
+                <p>Stay where you are (at least for a while).</p>
+                <a href="#" class="viewsource">view source</a>
+            </div> -->
+            <!-- <div class="spacer s2"></div> -->
+            <div class="imgCont">
+                <img src="assets/teensTitle.png" alt="">
+            </div>
+        </section>
         <div id="container">
-            <div id="block">
-                <svg width="769" height="71" viewBox="0 0 769 71" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="16.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="55.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="94.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="133.5" cy="11.5" r="11.5" fill="#878787" />
-                    <path
-                        d="M0 32C0 26.4772 4.47715 22 10 22H22C27.5228 22 32 26.4772 32 32V66C32 68.7614 29.7614 71 27 71H5C2.23858 71 0 68.7614 0 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M39 32C39 26.4772 43.4772 22 49 22H61C66.5228 22 71 26.4772 71 32V66C71 68.7614 68.7614 71 66 71H44C41.2386 71 39 68.7614 39 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M78 32C78 26.4772 82.4772 22 88 22H100C105.523 22 110 26.4772 110 32V66C110 68.7614 107.761 71 105 71H83C80.2386 71 78 68.7614 78 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M117 32C117 26.4772 121.477 22 127 22H139C144.523 22 149 26.4772 149 32V66C149 68.7614 146.761 71 144 71H122C119.239 71 117 68.7614 117 66V32Z"
-                        fill="#C4C4C4" />
-                    <circle cx="171.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="210.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="249.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="288.5" cy="11.5" r="11.5" fill="#878787" />
-                    <path
-                        d="M155 32C155 26.4772 159.477 22 165 22H177C182.523 22 187 26.4772 187 32V66C187 68.7614 184.761 71 182 71H160C157.239 71 155 68.7614 155 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M194 32C194 26.4772 198.477 22 204 22H216C221.523 22 226 26.4772 226 32V66C226 68.7614 223.761 71 221 71H199C196.239 71 194 68.7614 194 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M233 32C233 26.4772 237.477 22 243 22H255C260.523 22 265 26.4772 265 32V66C265 68.7614 262.761 71 260 71H238C235.239 71 233 68.7614 233 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M272 32C272 26.4772 276.477 22 282 22H294C299.523 22 304 26.4772 304 32V66C304 68.7614 301.761 71 299 71H277C274.239 71 272 68.7614 272 66V32Z"
-                        fill="#C4C4C4" />
-                    <circle cx="326.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="365.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="404.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="443.5" cy="11.5" r="11.5" fill="#878787" />
-                    <path
-                        d="M310 32C310 26.4772 314.477 22 320 22H332C337.523 22 342 26.4772 342 32V66C342 68.7614 339.761 71 337 71H315C312.239 71 310 68.7614 310 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M349 32C349 26.4772 353.477 22 359 22H371C376.523 22 381 26.4772 381 32V66C381 68.7614 378.761 71 376 71H354C351.239 71 349 68.7614 349 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M388 32C388 26.4772 392.477 22 398 22H410C415.523 22 420 26.4772 420 32V66C420 68.7614 417.761 71 415 71H393C390.239 71 388 68.7614 388 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M427 32C427 26.4772 431.477 22 437 22H449C454.523 22 459 26.4772 459 32V66C459 68.7614 456.761 71 454 71H432C429.239 71 427 68.7614 427 66V32Z"
-                        fill="#C4C4C4" />
-                    <circle cx="481.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="520.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="559.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="598.5" cy="11.5" r="11.5" fill="#878787" />
-                    <path
-                        d="M465 32C465 26.4772 469.477 22 475 22H487C492.523 22 497 26.4772 497 32V66C497 68.7614 494.761 71 492 71H470C467.239 71 465 68.7614 465 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M504 32C504 26.4772 508.477 22 514 22H526C531.523 22 536 26.4772 536 32V66C536 68.7614 533.761 71 531 71H509C506.239 71 504 68.7614 504 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M543 32C543 26.4772 547.477 22 553 22H565C570.523 22 575 26.4772 575 32V66C575 68.7614 572.761 71 570 71H548C545.239 71 543 68.7614 543 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M582 32C582 26.4772 586.477 22 592 22H604C609.523 22 614 26.4772 614 32V66C614 68.7614 611.761 71 609 71H587C584.239 71 582 68.7614 582 66V32Z"
-                        fill="#C4C4C4" />
-                    <circle cx="636.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="675.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="714.5" cy="11.5" r="11.5" fill="#878787" />
-                    <circle cx="753.5" cy="11.5" r="11.5" fill="#878787" />
-                    <path
-                        d="M620 32C620 26.4772 624.477 22 630 22H642C647.523 22 652 26.4772 652 32V66C652 68.7614 649.761 71 647 71H625C622.239 71 620 68.7614 620 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M659 32C659 26.4772 663.477 22 669 22H681C686.523 22 691 26.4772 691 32V66C691 68.7614 688.761 71 686 71H664C661.239 71 659 68.7614 659 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M698 32C698 26.4772 702.477 22 708 22H720C725.523 22 730 26.4772 730 32V66C730 68.7614 727.761 71 725 71H703C700.239 71 698 68.7614 698 66V32Z"
-                        fill="#C4C4C4" />
-                    <path
-                        d="M737 32C737 26.4772 741.477 22 747 22H759C764.523 22 769 26.4772 769 32V66C769 68.7614 766.761 71 764 71H742C739.239 71 737 68.7614 737 66V32Z"
-                        fill="#C4C4C4" />
-                </svg>
+            <div class="question">
+                <h3>Teen health seems to be the enigma of the century for researchers, parents, and even teens themselves.</h3>
+                <p>Indeed, news articles frequently cite increasing depression rates among teenagers over the past few years as evidence of the negative effects of teens' infatuation with social media in particular. The Northwestern University Center on Media and Human Development's 2015 study "Teens, Health, and Technology" looks at how teens access health information – and its insights provide a window into teen behavior. The study directly asked teens about their health habits. The following graph plots answers to the question "People get information about health from many different sources. Please mark how much information about health topics you have gotten from each of the following:" </p>
+                <h3>Teen Health Information Sources, Frequency of Access</h3>
+            </div>
+            <div id="Q1vis" class="visCont">
 
+                <!-- <p>hello</p> -->
+            </div>
+            <div class="key">
+                
             </div>
         </div>
         <div id="container2">
-            <div id="block">
-                <p>Hello There</p>
+            <div class="question">
+                <h3>Teens primary sources of health information include parents, health classes in school, doctors and nurses, and the internet – but not social media.</h3>
+                <p>This would suggest that teens are more skeptical of social media as a source of health information than is often portrayed in pop culture and the media. But how do teens rate the information they recieve from these sources? <br>Notably, teens are most satisfied by health information from parents and doctors/nurses – even though they go to doctors and nurses less frequently for health information. Also, 22 percent of respondents rated health information from books as very satisfying, even though only 10 percent seek them out "a lot". The following graph plots answers to the question "How satisfied are you with the health information you’ve gotten from: (the previous sources)" </p>
+                <h3>Teen Satisfaction with Health Information Sources</h3>
+            </div>
+            <div id="Q2vis" class="visCont">
+                
+            </div>
+        </div>
+
+        <div id="container3">
+            <div class="question">
+                <h3>Teens are most satisfied by health information from parents and doctors/nurses – even though they go to doctors and nurses less frequently for health information. What about sensitive health information?</h3>
+                <p>When asked about sensitive health information, 39 percent of teens responded that they are "very likely" to look up information online - more than responded "very likely" to talk to a doctor or their parents. The question specifically refers to birth control and depression as "sensitive health topics". How do answers change? The following graph plots answers to the question "If you had a question about a sensitive health topic (like birth control or depression), how likely would you be to do each of the following:" </p>
+                <h3>Teen Sensitive Health Topic Information Sources, Likelihood of Access Given Sensitive Health Question</h3>
+            </div>
+            <div id="Q3vis" class="visCont">
+                
+            </div>
+        </div>
+
+        <div id="changeBack"></div>
+
+        <div id="container4">
+            <div class="question">
+                <h3>For both sensitive and general health information, more than 25 percent of teens responded that they were "very likely" to look up information online, even though only 25 percent responded that they access health information online "a lot".</h3>
+                <p>For questions about general health information,  The following graph plots answers to the question "If you had a question about a sensitive health topic (like birth control or depression), how likely would you be to do each of the following:" </p>
+                <h3>Teen General Health Topic Information Sources, Likelihood of Access Given General Health Question</h3>
+            </div>
+            <div id="Q4vis" class="visCont">
+                
+            </div>
+        </div>
+
+        <div id="container5">
+            <div class="question">
+                <h2>So What?</h2>
+                <h3>The data suggests that teens <em>underestimate</em> their propensity to look for health information online.</h3>
+                <p>When asked about sensitive health information, 39 percent of teens responded that they are "very likely" to look up information online. When asked about general health information, 46 percent of teens responded that they are "very likely" to look up information online. Given that general and sensitive health information together make up all health information, the difference between 25 percent of teens that access online health information "a lot" and 39-46 percent that are "very likely" to look up health information online suggests that teens access health information online at higher rates than they expect to do so.</p>
+                <h4>"Teens access health information online at higher rates than they expect to do so"</h4>
+                <p>This has implications on health providers like colleges and high schools. The data suggests that <span>teens need easy to access and understand resources about health.</span></p>
             </div>
         </div>
         
