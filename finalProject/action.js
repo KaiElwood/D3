@@ -14,8 +14,8 @@ $(function () {
     });
 
     var containerScene = new ScrollMagic.Scene({
-        triggerElement: '#container', duration: 400
-    , triggerHook: 0.17})
+        triggerElement: '#container', duration: 200
+    , triggerHook: 0.1})
         // .setTween(backgroundChange)
         .setPin('#container')
         // .addIndicators({name: "1 (duration: 700)"})
@@ -23,8 +23,8 @@ $(function () {
         .addTo(controller);
     
     var containerScene2 = new ScrollMagic.Scene({
-        triggerElement: '#container2', duration: 400
-    , triggerHook: 0.1
+        triggerElement: '#container2', duration: 200
+    , triggerHook: 0.05
     })
         .setPin('#container2')
         .setTween(backgroundChangeBody)
@@ -32,8 +32,8 @@ $(function () {
         .addTo(controller);
 
     var containerScene3 = new ScrollMagic.Scene({
-        triggerElement: '#container3', duration: 400
-    , triggerHook: 0.1
+        triggerElement: '#container3', duration: 200
+    , triggerHook: 0.05
     })
         .setPin('#container3')
         // .setTween(backgroundChangeBody)
@@ -48,8 +48,8 @@ $(function () {
         .addTo(controller);
 
     var containerScene4 = new ScrollMagic.Scene({
-        triggerElement: '#container4', duration: 400
-    , triggerHook: 0.1
+        triggerElement: '#container4', duration: 200
+    , triggerHook: 0.05
     })
         .setPin('#container4')
         // .addIndicators()
