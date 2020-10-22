@@ -1,0 +1,30 @@
+rect{
+    fill: steelblue;
+}
+
+text{
+    font-size: 1.4em;
+}
+
+h1 {
+    text-align: center;
+}
+
+.visCont{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 60%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.visCont > svg {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+}
