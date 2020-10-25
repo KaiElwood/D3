@@ -1,0 +1,48 @@
+circle{
+    fill: steelblue;
+}
+
+text{
+    font-size: 2em;
+    font-family: sans-serif;
+}
+
+.tick text {
+    fill: #635F5d
+}
+
+.tick line{
+    stroke: #C0C0bb
+}
+
+h1 {
+    text-align: center;
+}
+
+.axis-label{
+    font-size: 3em;
+    fill: #8E8883;
+}
+
+.title{
+    fill: #635F5D
+}
+
+.visCont{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 80%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.visCont > svg {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0;
+}
