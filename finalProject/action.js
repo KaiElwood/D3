@@ -178,7 +178,7 @@ function displayGraph(asset, svg, legendSpacing, legendOffset){
                 .attr("width",x.bandwidth())
                 .attr("stroke", "black")
                 .on('mouseover', function (d, i) {
-                    console.log(d)
+                    // console.log(d)
                     d3.select(this).transition()
                          .duration('50')
                          .attr('opacity', '.85');
