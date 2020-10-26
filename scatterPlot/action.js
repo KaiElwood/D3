@@ -87,12 +87,17 @@ const render = data => {
         .attr("class", "tooltip-donut")
         .style("opacity", 0);
 
-    // console.log(xScale.domain());
+    const color = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.year))
+        .range(["white", "#306BAC"]);
+
+    console.log(d3.extent(data, d => d.year));
     g.selectAll('circle').data(data)
         .enter().append('circle')
             .attr("cy", d => yScale(yValue(d)))
             .attr("cx", d => xScale(xValue(d)))
             .attr("r", circleRad)
+            .attr("fill", d => color(d.year))
             .on('mouseover', function (d, i) {
                 d3.select(this).transition()
                     .duration('50')
@@ -101,7 +106,7 @@ const render = data => {
                 div.transition()
                     .duration(50)
                     .style("opacity", 1);
-                div.html(d.target.__data__.name)
+                div.html(d.target.__data__.year + " " +d.target.__data__.name)
                     .style("left", (d.pageX + 10) + "px")
                     .style("top", (d.pageY - 15) + "px");
             })
