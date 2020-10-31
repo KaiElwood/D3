@@ -1,1 +1,1 @@
-This bar chart shows the estimated population by age group of countries classified as "high income". The data comes from the year 2020 estimate in the [UN World Population Prospects 2019](https://population.un.org/wpp/Download/)
+This scatter plot shows car gas mileage versus weight for cars from 1970 to 1983.
