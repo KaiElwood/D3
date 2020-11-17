@@ -1,9 +1,3 @@
-window.addEventListener("resize", function() {
-    document.querySelector('svg').remove;
-    createElements()
-});
-
-
 function createElements(){
     const svg = d3.select('svg')
         .attr('height', innerHeight)
