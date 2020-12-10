@@ -1,3 +1,6 @@
+// importing functions – make sure everything is imported as a module, and then you can specify which functions you'd like to export or import
+import { fruitbowl as fruitBowl} from './fruits.js';
+
 function createElements(){
     const svg = d3.select('svg')
         .attr('height', innerHeight)
@@ -10,54 +13,43 @@ function createElements(){
     const radiusScale = d3.scaleOrdinal()
         .domain(["apple", "lemon"])
         .range([50, 20])
-        
-    // RENDERING LOGIC TEMPLATE
-    // references react components and structure – selection is element, props are properties
-    const render = (selection, { fruits }) => {
-
-        // how does this work?
-        // 1. selectAll sets up elements portion of d3 data join – looks for all existing circles – makes empty selection at time code is invoked
-        // 2. then .data provides the data which NEEDS TO BE AN ARRAY
-        // 3. we now have the total number of elements and total length of array
-        // 4. enter and append will work if there are no existing dom elements for the data
-        selection.selectAll('circle').data(fruits)
-            .enter().append('circle')
-            // if we wanted to change height, we should add code below to merge section
-            .attr("cx", (d, i) => i * 150 + 100)
-            .attr("cy", innerHeight / 2)
-        .merge(selection.selectAll('circle').data(fruits))
-            .attr("r", d => radiusScale(d.type))
-            .attr("fill", d => colorScale(d.type));
-        
-        // update case – THE DATA JOIN ITSELF IS THE UPDATE SELECTION
-        // You can also use merge to avoid duplicate code –– SEE ABOVE
-        // selection.selectAll('circle').data(fruits)
-        //     .attr("r", d => radiusScale(d.type))
-        //     .attr("fill", d => colorScale(d.type));
-            
-        // exit case
-        selection.selectAll('circle').data(fruits)
-            .exit().remove();
-    }
     
-    const makeFruit = type => ({type});
+    // what data does each fruit contain? we can give it a type and an ID
+    const makeFruit = type => ({
+        type,
+        id: Math.random()
+    });
 
-    const fruits = d3.range(5)
+    let fruits = d3.range(5)
         .map(() => makeFruit('apple'));
 
-    render(svg, { fruits });
+    const render = () => {
+        fruitBowl(svg, {
+            fruits
+        })
+    };
+
+    render();
 
     // eating an apple
     setTimeout(() => {
+        console.log("One apple down!")
         fruits.pop();
-        render(svg, { fruits });
+        render();
     }, 1000);
 
     // replacing with lemon
     // this will not work unless we use update pattern!!!
     setTimeout(() => {
+        console.log("One lemon down!")
         fruits[2].type = "lemon";
         render(svg, { fruits });
+    }, 2000);
+
+    // eating an apple
+    setTimeout(() => {
+        fruits = fruits.filter((d, i) => i !== 1);
+        render();
     }, 3000);
 
 }
