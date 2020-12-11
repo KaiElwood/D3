@@ -6,7 +6,7 @@ const radiusScale = d3.scaleOrdinal()
     .domain(["apple", "lemon"])
     .range([50, 20]);
 
-const xPos = (d, i) => i * 150 + 100;
+// const xPos = (d, i) => i * 150 + 100;
 
 const translatePos = (d, i) => `translate(${i * 180 + 100},${innerHeight / 2})`;
 
@@ -21,7 +21,6 @@ export const fruitbowl = (selection, props) => {
     groupsEnter
         .attr('transform', translatePos)
         .merge(groups)
-            // .attr('transform', (d, i) => `translateY(${innerHeight / 2})`)
             .transition().duration(1000)
             .attr('transform', translatePos)
     groups.exit()
@@ -39,7 +38,6 @@ export const fruitbowl = (selection, props) => {
         .transition().duration(800)
         .attr("fill", "white")
     .remove();
-    // groups.exit().remove();
 
     let circles = groups.select('circle');
     groupsEnter.append("circle")
