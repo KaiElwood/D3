@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+text {
+    font-size: 2em;
+    text-anchor: middle;
+
+}

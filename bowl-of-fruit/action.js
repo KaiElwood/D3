@@ -5,14 +5,6 @@ function createElements(){
     const svg = d3.select('svg')
         .attr('height', innerHeight)
         .attr('width', innerWidth);
-
-    const colorScale = d3.scaleOrdinal()
-        .domain(["apple", "lemon"])
-        .range(["#c11d1d", "#eae600"])
-
-    const radiusScale = d3.scaleOrdinal()
-        .domain(["apple", "lemon"])
-        .range([50, 20])
     
     // what data does each fruit contain? we can give it a type and an ID
     const makeFruit = type => ({
