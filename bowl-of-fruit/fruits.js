@@ -45,7 +45,7 @@ export const fruitbowl = (selection, props) => {
     groups.exit()
         .select('text')
         .transition().duration(800)
-        .attr("fill", "white")
+        // .attr("fill", "white")
     .remove();
 
     let circles = groups.select('circle');
