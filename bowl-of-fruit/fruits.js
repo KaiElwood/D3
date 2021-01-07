@@ -15,6 +15,15 @@ const translatePos = (d, i) => `translate(${i * 180 + 100},${innerHeight / 2})`;
 export const fruitbowl = (selection, props) => {
     const { fruits } = props;
 
+    const bowl = selection.selectAll("rect")
+        .data([null])
+        .enter().append("rect")
+            .attr("height", 300)
+            .attr("width", 900)
+            .attr("rx", 200)
+            .attr("y", innerHeight/4 + 40)
+            .attr("fill", "grey");
+
     let groups = selection.selectAll('g')
     .data(fruits, d => d.id);
     const groupsEnter = groups.enter().append('g');
@@ -50,7 +59,7 @@ export const fruitbowl = (selection, props) => {
         .merge(groups.select('text'))
             .text(d => d.type)
             .attr("fill", "black")
-            .attr("y", 120);
+            .attr("y", 80);
 
     // // in order to return a unique ID, we can ask for it by returning the id for each data point in fruits
     // let circles = selection.selectAll('circle').data(fruits, d => d.id);
