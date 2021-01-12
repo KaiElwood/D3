@@ -15,15 +15,6 @@ const translatePos = (d, i) => `translate(${i * 180 + 100},${innerHeight / 2})`;
 export const fruitbowl = (selection, props) => {
     const { fruits } = props;
 
-    const bowl = selection.selectAll("rect")
-        .data([null])
-        .enter().append("rect")
-            .attr("height", 300)
-            .attr("width", 900)
-            .attr("rx", 200)
-            .attr("y", innerHeight/4 + 40)
-            .attr("fill", "grey");
-
     let groups = selection.selectAll('g')
     .data(fruits, d => d.id);
     const groupsEnter = groups.enter().append('g');
@@ -51,6 +42,9 @@ export const fruitbowl = (selection, props) => {
     let circles = groups.select('circle');
     groupsEnter.append("circle")
     .merge(circles)
+        .on('click', () => {
+            console.log("clicked");
+        })
         .transition().duration(1000)
         .attr("fill", d => colorScale(d.type))
         .attr("r", d => radiusScale(d.type));
