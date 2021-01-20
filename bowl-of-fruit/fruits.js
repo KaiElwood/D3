@@ -13,7 +13,7 @@ const translatePos = (d, i) => `translate(${i * 180 + 100},${innerHeight / 2})`;
 // RENDERING LOGIC TEMPLATE
 // references react components and structure – selection is element, props are properties
 export const fruitbowl = (selection, props) => {
-    const { fruits } = props;
+    const { fruits, onClick, selectedFruit } = props;
 
     let groups = selection.selectAll('g')
     .data(fruits, d => d.id);
@@ -42,9 +42,7 @@ export const fruitbowl = (selection, props) => {
     let circles = groups.select('circle');
     groupsEnter.append("circle")
     .merge(circles)
-        .on('click', () => {
-            console.log("clicked");
-        })
+        .on('click', d => onClick(d.path[0].__data__.id))
         .transition().duration(1000)
         .attr("fill", d => colorScale(d.type))
         .attr("r", d => radiusScale(d.type));

@@ -15,9 +15,18 @@ function createElements(){
     let fruits = d3.range(5)
         .map(() => makeFruit('apple'));
 
+    let selectedFruit = null;
+
+    const onClick = id => {
+        selectedFruit = id;
+        console.log(selectedFruit);
+        render();
+    };
+
     const render = () => {
         fruitBowl(svg, {
-            fruits
+            fruits,
+            onClick
         })
     };
 

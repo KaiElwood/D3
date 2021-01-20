@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+
+}
+
+path {
+    fill: black;
+    stroke: white;
+    stroke-width: .1px;
+}
+
+.sphere{
+    /* stroke: blue; */
+    /* stroke-width: 1px; */
+    fill: grey;
+}
