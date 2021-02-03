@@ -9,8 +9,29 @@ path {
     stroke-width: .1px;
 }
 
+path:hover{
+    fill: red;
+}
+
 .sphere{
     /* stroke: blue; */
     /* stroke-width: 1px; */
     fill: grey;
+}
+
+.sphere:hover{
+    fill: grey
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: .5rem;
+    background: #FFFFFF;
+    color: #313639;
+    border: 1px solid #313639;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: .6rem;
+    font-family: 'Roboto', sans-serif;
 }
