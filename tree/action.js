@@ -27,6 +27,7 @@ d3.json('data.json')
     .then(data => {
         // the root of the tree
         const root = d3.hierarchy(data);
+        // console.log(treeLayout.nodes(root).reverse());
         // the "links" or connections between the data points
         const links = treeLayout(root).links();
         // creates a linked tree
