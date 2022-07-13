@@ -4,6 +4,13 @@
     <title>US Air Quality</title>
   </head>
   <body>
+    <label for="filters">Sort Data By:</label>
+    <select name="filters" id="filters">
+      <option value="ED">Emissions (Descending)</option>
+      <option value="EA">Emissions (Ascending)</option>
+      <option value="S">State (A-Z)</option>
+    </select>
+    <input id='delay' type="number" value="25">
     <div id="chart-container"></div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="./action.js"></script>
