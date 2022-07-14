@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>US Weather Stations</title>
+    <style>
+        #select > label {display: block;}
+        input[type="checkbox"] {
+            width: 40;
+            height: 40;
+            border: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            position: relative;
+            top: 17px;
+        }
+    </style>
+  </head>
+  <body>
+    <input type="number" name="min" id="min">
+    <label for="min">Minimum Station Elevation</label>
+    <input type="number" name="max" id="max">
+    <label for="max">Maximum Station Elevation</label>
+    <button id="filterButton">Filter Circles</button>
+    <div id="chart-container"></div>
+    <div id="select">
+        <label for="1"><input type="checkbox" name="Class 1" value='1' id="1">Class 1</label>
+        <label for="2"><input type="checkbox" name="Class 2" value='2' id="2">Class 2</label>
+        <label for="3"><input type="checkbox" name="Class 3" value='3' id="3">Class 3</label>
+    </div>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="./us-station-interaction.js"></script>
+  </body>
+</html>

@@ -149,9 +149,7 @@ const renderChart = (datos) => {
                   .duration((d,i) => 300 + i * delayValue.value)
                   .style('opacity', "1")
                   .end()
-              ))
-            // .transition().duration((d,i) => 300 + i * delayValue.value).style("opacity", 1)
-            ,
+              )),
         (update) => {
             d3.selectAll('.pathLines').remove();
             update
