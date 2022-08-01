@@ -1,6 +1,7 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
@@ -39,6 +40,11 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({ 'process.env.NODE_ENV': JSON.stringify( 'production' ) }),
+		resolve({
+			browser: true,
+			dedupe: ['svelte']
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
@@ -55,10 +61,6 @@ export default {
 		// some cases you'll need additional configuration -
 		// consult the documentation for details:
 		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
 		commonjs(),
 		typescript({
 			sourceMap: !production,
