@@ -3,18 +3,16 @@
 
 	let name = 'kai';
 	let name2 = 'kai';
-	// import parseData from './data.js'
-  	// import Map from './components/map.svelte'
-  	// import Scatter from './components/scatter.svelte'
+  	import Map from './components/map.svelte'
+  	import Scatter from './components/scatter.svelte'
   	import Linegraph from './components/line-graph.svelte'
 	import Scrolly from "./Scrolly.svelte";
-	import * as d3Fetch from 'd3-fetch';
 	import parseData from './Data.js'
 	// import Scatterplot from "./Scatterplot.svelte";
 	const dataSrc = {
 		chart1: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTY2WjTSxbE2evOXU9Nz-lzi0YcGpJnp2SggBd96mwLniI2oHsPcFGPmkowDprbAFeuluZAGHbk9Tw_/pub?output=csv',
 		chart2: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRXNmppyXOKfEedHeinV60lYBzrE_gyyFd1r-8_bBlHjljixP5LEQnKiktnDaYg4GsHQ5BiVxqk2hk2/pub?output=csv',
-		chart3: ''
+		chart3: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8R7aocgbUM4L722IUI0_85qHhfoQ9ho2STBOgpTla_UwGgEGv-6G_eylHnQp0-thV0oAmoOedup7k/pub?output=csv'
 	}
 
 	const allData = loadData()
@@ -86,30 +84,37 @@ I will have a variable that registers scroll height, and this variable will lead
 	<div>
 		<div data-cy='sand-particles' class='bg-sand'>
 			<div class="title">
+				<img src="./images/lettuce-removebg-preview.png" class='lettuce' alt="lettuce">
+				<img src="./images/Carrot-removebg-preview.png" class='carrot' alt="Carrot">
+				<img src="./images/watermelon-removebg-preview.png" class='watermelon' alt="Carrot">
 				<h1>Food Deserts</h1>
 				<h2>{name2}</h2>
 				<p>Intro text about project</p>
 			</div>
-			<!-- <img src="assets/lettuce-removebg-preview.png" alt="lettuce">
-			<img src="assets/Carrot-removebg-preview.png" alt="Carrot"> -->
 		</div>
 	</div>
 	<!-- <Scrolly>></Scrolly> -->
 	{ #await allData}
 		<p>Loading!</p>
 	{:then allData} 
+		<p>
+			IFIUSHFPODOJSFood deserts are a real problem in the US. Loosely defined as geographic areas where residents' access to affordable, healthy food options (especially fresh fruits and vegetables) are limited, food deserts are typically looked at from a local perspective, due to the complicated nature of food access. Access to healthy foods may be limited by transportation options, income differences, and proximity. When evaluating areas that may be food deserts, regional and county-level data are typically not used, due to inaccuracies that may arise from aggregating at the county level. However, county-level data can tell us some interesting things about food deserts. Let's explore!
+		</p>
+		<p>
+			In the below graph, counties with average grocery stores per 1000 residents lower than 0.1 are defined as food deserts. From 2013-2016, the total number of food deserts increased.
+		</p>
 		<div data-cy='line-graph'>
-			<Linegraph data={allData[0]} titles={['Number of Counties', 'Year','Number of counties with fewer than 0.1 Grocery Stores per 1,000 residents']} />
-			here is some placeholder text that will appear under the line graph
+			<Linegraph data={allData[0]} titles={['Percent of Counties', 'Year','Percent of counties with fewer than 0.1 Grocery Stores per 1,000 residents']} />
 		</div>
+		<p>
+			When we look at 
+		</p>
 		<div data-cy="scatterplot">
-			<!-- <Scatter data="{data}"
-			titles="yes"
-			selectedIndicator={selectedIndicator}
-			isMobile="{isMobile}"/> -->
+			<Scatter data="{allData[1]}"
+			titles={['Per Capita Income', 'Grocery Stores Per 1000 People','Grocery Stores and Per Capita Income, Average 2013-2016']}/>
 		</div>
 		<div data-cy="countymap">
-			<!-- <Map  {data} /> -->
+			<Map data={allData[2]} filteredData={allData[3]}/>
 		</div>
 	{/await}
 </main>

@@ -2,9 +2,9 @@
     import { onMount } from 'svelte'
     import { draw, fade } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
-    import { scaleLinear, scaleTime } from 'd3-scale';
+    import { scaleLinear } from 'd3-scale';
     import { line, curveNatural } from 'd3-shape';
-    import { extent, max } from "d3-array";
+    import { extent } from "d3-array";
     import Axis from "./Axis.svelte";
     import tippy from 'sveltejs-tippy'
 
@@ -15,23 +15,17 @@
     let width = 800
     let height = 400
 
-    // let circles = true;
-    // let time = 100;
-    // onMount(() => setTimeout(() => {
-    //     circles = true;
-    // }, time));
-
     let mainTitle = titles[2];
     let yAxisTitle = titles[0];
     let xAxisTitle = titles[1];
 
-    const padding = { top: 35, right: 35, bottom: 35, left: 55 }
+    const padding = { top: 35, right: 65, bottom: 35, left: 65 }
 
     let xMinMax = extent(data, (d)  =>  d.year);
     let yMinMax = extent(data, (d)  =>  d.data);
 
     let innerHeight = height - padding.bottom - padding.top;
-    let yExtension = 10;
+    let yExtension = 1;
 
     $: xScale = scaleLinear()
     .domain(xMinMax)
@@ -50,7 +44,7 @@
       console.log(data)
         const template = `
         <div>${data.year}</div>
-        <p><span>Counties with fewer than 0.1 grocery stores per 1,000 residents:</span> ${data.data}</p>
+        <p><span>Percent of counties with fewer than 0.1 grocery stores per 1,000 residents:</span> ${data.data}</p>
         `
 
         return {
@@ -61,8 +55,6 @@
     }
 
     const resize = () => {
-      console.log(height)
-      console.log(figure.getBoundingClientRect())
         ;({ width } = figure.getBoundingClientRect())
     }
 
@@ -70,28 +62,25 @@
 </script>
 
 <svelte:window on:resize="{resize}" />
-<figure bind:this="{figure}">
+<figure class='fig' bind:this="{figure}">
   <!-- svelte-ignore component-name-lowercase -->
   <svg class="linechart" {width} {height}>
 
     <text class="mainTitle title" x="{width/2}" y="{padding.top}">{mainTitle}</text>
 
     <!-- y axis -->
-    <text class="yAxisTitle title" x="{0}" y="{padding.left-padding.right}" style='transform: translate(0px, {innerHeight/2}px) rotate(-90deg);'>{yAxisTitle}</text>
+    <text class="yAxisTitle title" x="{0}" y="{padding.left-padding.right}" style='transform: translate({padding.left/3}px, {innerHeight/2}px) rotate(-90deg);'>{yAxisTitle}</text>
     <Axis {innerHeight} {padding} scale={yScale} position="left" />
 
     <!-- x axis -->
     <text class="xAxisTitle title" x="{width / 2}" y="{height-padding.bottom}">{xAxisTitle}</text>
     <Axis {innerHeight} {padding} scale={xScale} position="bottom" />
 
-    
-    <!-- check data exists, update on change to selectedIndicator -->
     {#if data}
         <path 
         in:draw="{{duration: 3000}}"
         d={line_gen} 
         style="fill:transparent; stroke:black"/>
-        <!-- {#key selectedIndicator} -->
         {#each data as datapoint}
         <circle
             in:fade="{{duration: 1000, delay: 2500, easing: quintOut}}"

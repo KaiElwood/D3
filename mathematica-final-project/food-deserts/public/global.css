@@ -1,3 +1,7 @@
+html {
+	overflow-x: hidden;
+}
+
 html, body {
 	position: relative;
 	width: 100%;
@@ -18,6 +22,146 @@ svg {
 
 text.title {
 	text-anchor: middle;
+}
+
+/* .bounce {
+	animation: bounceUp 6s infinite linear;
+} */
+
+@keyframes bounceUp {
+	0% {
+		transform: translateY(0) translateX(0) rotate(0deg);
+	  }
+	5% {
+		transform: translateY(0) translateX(5vw) rotate(5deg);
+	  }
+	15% {
+		transform: translateY(-50%) translateX(15vw) rotate(50deg);
+	}
+	30% {
+		transform: translateY(0) translateX(30vw) rotate(140deg);
+	}
+	40% {
+		transform: translateY(-25%) translateX(40vw) rotate(200deg);
+	}
+	50% {
+		transform: translateY(0) translateX(50vw) rotate(280deg);
+	}
+	60% {
+		transform: translateY(20%) translateX(60vw) rotate(360deg);
+	}
+	70% {
+		transform: translateY(0) translateX(70vw) rotate(400deg);
+	}
+	77%{
+		transform: translateY(15%) translateX(77vw) rotate(480deg);
+	}
+	85%{
+		transform: translateY(0) translateX(85vw) rotate(540deg);
+	}
+	90% {
+		transform: translateY(10%) translateX(90vw) rotate(590deg);
+	}
+	95%{
+		transform: translateY(0) translateX(95vw) rotate(650deg);
+	}
+	97% {
+		transform: translateY(5%) translateX(97vw) rotate(690deg);
+	}
+	98% {
+		transform: translateY(0) translateX(98vw) rotate(700deg);
+	}
+	99% {
+		transform: translateY(2%) translateX(99vw) rotate(710deg);
+	}
+	100% {
+		transform: translateY(0) translateX(100vw) rotate(719deg);
+	}
+}
+
+img { 
+	width: 100px;
+	position: absolute;
+}
+
+.carrot {
+	top: 30%;
+	left: 0%;
+	animation: bounceUp 5s infinite linear;
+}
+
+.lettuce {
+	top: 60%;
+	left: -8%;
+	animation: bounceUp 6s infinite linear;
+}
+
+.watermelon { 
+	top: 10%;
+	left: 0%;
+	animation: bounceUp 8s infinite linear;
+}
+
+path {
+	transition: fill .5s ease-in-out;
+}
+
+#yearButtons {
+	display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#yearButtons input {
+	padding: 0.4em 3.2em;
+	border: 1px solid black;
+	border-left: 0;
+	border-radius: 0;
+	transition: background-color .5s ease-in-out;
+}
+
+#yearButtons input:nth-of-type(1) {
+	border-radius: 15px 0 0 15px;
+	border-left: 1px solid black;
+}
+
+#yearButtons input:nth-of-type(4) {
+	border-radius: 0 15px 15px 0;
+}
+
+#yearButtons input.checked {
+	background-color: mediumseagreen;
+}
+
+#yearButtons input.checked:hover {
+	background-color: mediumseagreen;
+}
+
+#yearButtons input:hover {
+	background-color: rgb(146, 165, 155);
+}
+
+.fig {
+	position: relative;
+	margin: 50px auto !important;
+	max-width: 1000px;
+}
+
+div[data-tippy-root] p {
+	padding: 0;
+}
+
+p {
+	max-width: 600px;
+    margin: auto;
+	padding: 50px 0;
+	line-height: 2em;
+	font-family: 'Yrsa', serif;
+}
+
+h1, h2 {
+	font-family: 'Inconsolata', monospace;
 }
 
 a {
@@ -68,4 +212,29 @@ button:not(:disabled):active {
 
 button:focus {
 	border-color: #666;
+}
+
+.canvasLegendContainer {
+	position: absolute;
+    top: 7%;
+    left: 75%;
+    rotate: -45deg;
+}
+
+.legendText {
+	position: relative;
+    font-size: 12px;
+    text-align: left;
+}
+
+.legendText:nth-of-type(1) {
+	top: -7px;
+    left: 8px;
+}
+
+.legendText:nth-of-type(2) {
+	transform: rotate(-90deg);
+	top: -93px;
+    left: -63px;
+	text-align: right;
 }
