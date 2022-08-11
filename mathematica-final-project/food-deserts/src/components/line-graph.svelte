@@ -44,7 +44,7 @@
       console.log(data)
         const template = `
         <div>${data.year}</div>
-        <p><span>Percent of counties with fewer than 0.1 grocery stores per 1,000 residents:</span> ${data.data}</p>
+        <p><span>Percent of counties with fewer than 0.1 grocery stores per 1,000 residents:</span> ${data.data.toLocaleString(undefined, {maximumFractionDigits: 2})}%</p>
         `
 
         return {

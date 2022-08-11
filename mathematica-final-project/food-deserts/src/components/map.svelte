@@ -2,45 +2,30 @@
     import * as d3Fetch from 'd3-fetch';
     import { fade } from 'svelte/transition';
     import { onMount } from 'svelte';
-    import { scaleOrdinal, scaleLinear } from 'd3-scale';
+    import { scaleLinear } from 'd3-scale';
     import { geoAlbersUsa, geoPath } from 'd3-geo';
     import { color } from 'd3-color';
     import { interpolateLab } from 'd3-interpolate';
     import tippy from 'sveltejs-tippy'
     import ColorLegend from './color-legend.svelte';
+    import { tooltip } from './tooltip';
 
     let figure
     let width = 800
     let height = 600
-
     export let data;
     let dataset  =  data;
     let selectedYear = '2013';
-
     export let filteredData;
-    console.log(data)
-
     let filteredXAxis = filteredData.x;
     let filteredYAxis = filteredData.y;
-
-    console.log(filteredXAxis)
-
-
     const projection = geoAlbersUsa();
+
     $: path = geoPath(projection
-        .translate([width / 2, height / 2]));
-        // .fitSize([width, height], dataset));
-
-    // let colorScale = scaleLinear()
-    //   .domain([0,.15,3])
-    //   .range(['#FF4B4B', "#fd8d3c", "#feedde"])
-    //   .clamp(true);
-
-
-    //   domain could come from the extent minus some outliers
+        .translate([width / 2, height / 2])
+        .fitSize([width, height], dataset));
 
     let ordScale = (val, type) => {
-        // what is filteredYData?
       const index = type.indexOf(val);
       const scale = scaleLinear()
         .domain([0, type.length])
@@ -48,71 +33,75 @@
       return scale(index);
     }
 
-    let formatTooltip = (data) => {
-        // this is being formatted before any data is updated. I need to re-update every tooltip when new data is brought in
-        // debugger;
-        let template = '';
-        if(data.properties.selectedData == null) {
+    // const getTooltip = (datapoint) => {
+    //     if(datapoint.properties.data == null || datapoint.properties.data == undefined) {
+    //         return `
+    //         <div>${datapoint.properties.NAME} ${datapoint.properties.LSAD}</div>
+    //         <p><span>Grocery Stores Per 1000 People:</span> Data Not Available</p>
+    //         `
+    //     } else {
+    //         return `
+    //         <div>${datapoint.properties.data[selectedYear]?.COUNTY}, ${datapoint.properties.data[selectedYear]?.STATE}</div>
+    //         <p><span>Grocery Stores Per 1000 People:</span> ${datapoint.properties.data[selectedYear]?.groceryStores}</p>
+    //         `
+    //     }
+    // }
+
+    const setTooltips = () => {
+        dataset.features.forEach(d => {
+            let noDataTemplate = {content: `
+                <div>${d.properties.NAME} ${d.properties.LSAD}</div>
+                <p><span>Grocery Stores Per 1000 People:</span> Data Not Available</p>
+                <p><span>Percent Population in Poverty:</span> Data Not Available</p>
+                `,
+                allowHTML: true,
+                placement: 'top'
+            };
+            if(!d.properties.data){
+                    d.properties.tooltips = {2013: noDataTemplate, 2014: noDataTemplate, 2015: noDataTemplate, 2016: noDataTemplate};
+            } else {
+                for(let x=2013; x<2017; x++){
+                    (d.properties.tooltips ||= {})[x] = formatTooltip(d);
+                }
+            }
+        })
+    };
+
+    let formatTooltip = (datapoint) => {
+        let template;
+        if(datapoint.properties.data == null || datapoint.properties.data == undefined) {
             template = `
-            <div>${data.properties.NAME} ${data.properties.LSAD}</div>
+            <div>${datapoint.properties.NAME} ${datapoint.properties.LSAD}</div>
             <p><span>Grocery Stores Per 1000 People:</span> Data Not Available</p>
+            <p><span>Percent Population in Poverty:</span> Data Not Available</p>
             `
         } else {
             template = `
-            <div>${data.properties?.selectedData[0]?.COUNTY}, ${data.properties?.selectedData[0]?.STATE}</div>
-            <p><span>Grocery Stores Per 1000 People:</span> ${data.properties?.selectedData[0]?.groceryStores}</p>
+            <div>${datapoint.properties.data[selectedYear]?.COUNTY}, ${datapoint.properties.data[selectedYear]?.STATE}</div>
+            <p><span>Grocery Stores Per 1000 People:</span> ${datapoint.properties.data[selectedYear]?.groceryStores}</p>
+            <p><span>Percent of Population in Poverty:</span> ${datapoint.properties.data[selectedYear]?.poverty}</p>
             `
         }
-
         return {
         content: template,
         allowHTML: true,
-        placement: 'top',
+        placement: 'top'
         }
     }
     
-    // best option
     const resize = () => {
         dataset = dataset;
+        dataset.features.forEach(d => {console.log(d.properties.GEO_ID)})
         ;({ width } = figure.getBoundingClientRect())
     }
 
-    let scaleWidth = 75;
-    let scaleHeight = 75;
     let colorX = '#E6A2D0';
     let colorY = '#8AE1AE';
     let color0 = '#F3F3F3';
     let interpolator = interpolateLab;
 
-    const setColors = (value) => {
-        if (!value.properties.data){
-            value.properties.color = "#ccc";
-            return
-        }
-        let selectedYearArray = value.properties.data.filter(d => d.YEAR == selectedYear);
-        value.properties.selectedData = selectedYearArray;
-        if(selectedYearArray.length < 1) {
-            value.properties.color = '#ccc';
-            return
-        } else {
-            value.properties.color = bivariateColorScale([selectedYearArray[0].poverty, selectedYearArray[0].groceryStores]);
-            return;
-        }
-    }
-
-    const setData = () => {
-        dataset.features.forEach((value) => {
-            // console.log('initial color value', value.properties?.color);
-            setColors(value);
-            // formatTooltip(value);
-        })
-    };
-
     const bivariateColorScale = values => {
         const [xValue, yValue] = values;
-
-        // here, the x value is poverty, and the y value is grocery stores per 1000. more intense on the x axis would be fewer grocery stores. more intense color on the y axis would be higer percentage of people at or below 1 poverty/income ratio
-
         const xBotScale = interpolator(color0, colorX);
         const xTopScale = interpolator(
             colorY,
@@ -141,12 +130,32 @@
         return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
     }
 
+    const setColors = () => {
+        let noDataColor = '#ccc';
+
+        data.features.forEach(d => {
+            if(!d.properties.data){
+                d.properties.colors = {2013: noDataColor, 2014: noDataColor, 2015: noDataColor, 2016: noDataColor};
+            } else {
+                for(let x=2013; x<2017; x++){
+                    if(d.properties.data[x] == undefined) {
+                        (d.properties.colors ||= {})[x] = noDataColor;
+                    } else {
+                        (d.properties.colors ||= {})[x] = bivariateColorScale([d.properties.data[x].poverty, d.properties.data[x].groceryStores]);
+                    }
+                }
+            }
+        })
+    }
+
+    setColors();
+    setTooltips();
+
     let automatedChange;
     let buttonContainer;
     let buttons;
     let curVal = 0;
     onMount(resize)
-    onMount(setData)
 
     const changeDate = (event) => {
         if (event) {
@@ -157,14 +166,12 @@
                 buttons.forEach(el => el.classList.remove('checked'));
                 input.classList.add('checked')
                 selectedYear = input.value;
-                setData();
             }
         } else {
             buttons.forEach(el => el.classList.remove('checked'));
             buttons[curVal].classList.add('checked');
             selectedYear = buttons[curVal].value;
             curVal = (curVal > 2) ? 0 : curVal+1;
-            setData();
         }
         dataset = dataset;
     }
@@ -197,23 +204,29 @@
 
 2. FIX TOOLTIPS, add tooltip for legend as well
 3. ADD IN ADDITIONAL TEXT
- -->
+can I make an array of all the formatted tooltip tippy values and then just update that based on what year is currently selected?
 
+alternative option for tippy - create a new component, a mystery div that is added whenever you hover over a path element. the specific data for it is found... how?
+ -->
+ <!-- use:tippy={datapoint.properties.GEO_ID, {
+    content: `<h1>${tippyCount}</h1>`,
+    allowHTML: true,
+    placement: 'top'
+    }} -->
 
     <svg class="map" {width} {height}>
         {#if data}
-        <!-- what should I include as my key? -->
-        <!-- potentially two keys - one for date cahnge, one -->
             {#each dataset.features as datapoint (datapoint.properties.GEO_ID)}
                 <path
                 transition:fade
-                on:mouseenter='{formatTooltip(datapoint)}'
-                use:tippy="{formatTooltip(datapoint)}"
+                
+                use:tippy={datapoint.properties.tooltips[selectedYear]}
+                
                 d={path(datapoint)}
-                fill={datapoint.properties.color}
+                fill={datapoint.properties.colors[selectedYear]}
                 />
             {/each}
         {/if}
     </svg>
-    <ColorLegend width={100} height={100} colorX={colorX} colorY={colorY} color0={color0} interpolator={interpolator} xTitle={'% of pop in poverty'} yTitle={'Grocery stores per 1000 pop'}/>
+    <ColorLegend width={100} height={100} colorX={colorX} colorY={colorY} color0={color0} interpolator={interpolator} xTitle={'% in poverty'} yTitle={'Fewer Grocery Stores'}/>
 </figure>

@@ -8,8 +8,6 @@ function parseData({ src }) {
   const chart3Promise = d3Fetch.csv(src.chart3)
   
   let data = Promise.all([chart1Promise, chart2Promise, chart3Promise]).then(res => {
-    console.log(res)
-    // console.log(res)
     let [initialdata] = res;
     console.log('initial data', initialdata)
 
@@ -50,10 +48,10 @@ function parseData({ src }) {
     let dataArray = {x: [], y: []};
 
     res[2].map(d => {
-      d.poverty = +d.ACS_PCT_PERSON_INC99;
       dataArray.x.push(+d.ACS_PCT_PERSON_INC99);
       dataArray.y.push(+d.CCBP_RATE_SOGS_PER_1000);
       // percapincome is income per capita for the county
+      d.poverty = +d.ACS_PCT_PERSON_INC99;
       d.perCapIncome = +d.ACS_PER_CAPITA_INCOME;
       // grocerystores is number of stores per 1000 people
       d.groceryStores = +d.CCBP_RATE_SOGS_PER_1000;
@@ -62,7 +60,8 @@ function parseData({ src }) {
       // console.log("data element:", d)
       let mapEl = combinedGeoCountyData.get(d.FIPSCODE);
       // console.log('state element', mapEl);
-      (mapEl.properties.data ||= []).push(d);
+      // let dataObject = {[d.YEAR]: d};
+      (mapEl.properties.data ||= {})[d.YEAR] = d;
       combinedGeoCountyData.set(d.FIPSCODE, mapEl);
     })
     

@@ -2,7 +2,7 @@
 
 
 	let name = 'kai';
-	let name2 = 'kai';
+	let name2 = 'Final Project';
   	import Map from './components/map.svelte'
   	import Scatter from './components/scatter.svelte'
   	import Linegraph from './components/line-graph.svelte'
@@ -87,9 +87,9 @@ I will have a variable that registers scroll height, and this variable will lead
 				<img src="./images/lettuce-removebg-preview.png" class='lettuce' alt="lettuce">
 				<img src="./images/Carrot-removebg-preview.png" class='carrot' alt="Carrot">
 				<img src="./images/watermelon-removebg-preview.png" class='watermelon' alt="Carrot">
-				<h1>Food Deserts</h1>
+				<h1>Food Deserts in the US</h1>
 				<h2>{name2}</h2>
-				<p>Intro text about project</p>
+				<p>Can we identify aspects of food deserts at a county level?</p>
 			</div>
 		</div>
 	</div>
@@ -98,7 +98,7 @@ I will have a variable that registers scroll height, and this variable will lead
 		<p>Loading!</p>
 	{:then allData} 
 		<p>
-			IFIUSHFPODOJSFood deserts are a real problem in the US. Loosely defined as geographic areas where residents' access to affordable, healthy food options (especially fresh fruits and vegetables) are limited, food deserts are typically looked at from a local perspective, due to the complicated nature of food access. Access to healthy foods may be limited by transportation options, income differences, and proximity. When evaluating areas that may be food deserts, regional and county-level data are typically not used, due to inaccuracies that may arise from aggregating at the county level. However, county-level data can tell us some interesting things about food deserts. Let's explore!
+			Food deserts are a real problem in the US. Loosely defined as geographic areas where residents' access to affordable, healthy food options (especially fresh fruits and vegetables) are limited, food deserts are typically looked at from a local perspective, due to the complicated nature of food access. Access to healthy foods may be limited by transportation options, income differences, and proximity. When evaluating areas that may be food deserts, regional and county-level data are typically not used, due to inaccuracies that may arise from aggregating at the county level. However, county-level data can tell us some interesting things about food deserts. Let's explore!
 		</p>
 		<p>
 			In the below graph, counties with average grocery stores per 1000 residents lower than 0.1 are defined as food deserts. From 2013-2016, the total number of food deserts increased.
@@ -107,12 +107,18 @@ I will have a variable that registers scroll height, and this variable will lead
 			<Linegraph data={allData[0]} titles={['Percent of Counties', 'Year','Percent of counties with fewer than 0.1 Grocery Stores per 1,000 residents']} />
 		</div>
 		<p>
-			When we look at 
+			An important aspect of food deserts is that they often are found in lower income areas. However, at the county level, it's difficult to spot a defined trend between per capita income and grocery stores per 1,000 residents, as you can see in the graph below.
 		</p>
 		<div data-cy="scatterplot">
 			<Scatter data="{allData[1]}"
 			titles={['Per Capita Income', 'Grocery Stores Per 1000 People','Grocery Stores and Per Capita Income, Average 2013-2016']}/>
 		</div>
+		<p>
+			Perhaps one reason there is no clearly defined trend in the data is the size of the grocery stores in each county. While Arlington County in Virginia has a higher income per capita and a much larger population than Yakutat City and Bourough in Alaska, It has fewer grocery stores per resident. This may be due to differences in square footage of grocery stores in Alaska and in Virginia -- a larger grocery store may be able to feed more residents.
+		</p>
+		<p>
+			What is the trend over time? The following graph explores the connection between poverty and grocery stores per capita. Poverty is measured by the percent of people in each county who are considered in poverty by the US Census (income level at or below the poverty threshold). Greener areas represent fewer grocery stores per capita and a lower percentage of people in poverty, pink areas represent more grocery stores per capita and a higher percentage of people in poverty, and darker areas represent both fewer grocery stores and higher percentage of people in poverty.
+		</p>
 		<div data-cy="countymap">
 			<Map data={allData[2]} filteredData={allData[3]}/>
 		</div>

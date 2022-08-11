@@ -37,8 +37,8 @@
   const formatTooltip = (data) => {
       const template = `
       <div>${data?.COUNTY}, ${data?.STATE}</div>
-      <p><span>Grocery Stores Per 1000 People:</span> ${data?.groceryStores}</p>
-      <p><span>Income per Capita:</span> ${data?.perCapIncome}</p>
+      <p><span>Grocery Stores Per 1000 People:</span> ${data?.groceryStores.toLocaleString(undefined, {maximumFractionDigits: 2})}</p>
+      <p><span>Income per Capita:</span> ${data?.perCapIncome.toLocaleString(undefined, {maximumFractionDigits: 0})}</p>
       `
 
       return {
